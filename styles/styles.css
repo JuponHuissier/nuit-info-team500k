@@ -119,13 +119,14 @@ body {
       bottom: 50%;
       left: 50%;
       transform: translate(-50%, 50%);
-      background: #fef3c7;
-      border: 1px solid #fcd34d;
+      background: hsl(160, 41%, 48%);
+      border: 1px solid #715AFF;
       border-radius: 8px;
       padding: 20px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       text-align: center;
       z-index: 1000;
+      box-shadow: 10px 5px 5px rgb(0, 0, 0), -5px -5px 5px rgb(255, 255, 255);
   }
 
 /* Boutons retour : début */
@@ -184,7 +185,7 @@ body {
   }
   
   .accept-button {
-      background-color: #f59e0b;
+      background-color: #ec4c20;
       color: white;
       border: none;
       padding: 15px 25px;
@@ -196,11 +197,11 @@ body {
   }
   
   .accept-button:hover {
-      background-color: #d97706;
+      background-color: #ff0505;
   }
   
   .reject-button {
-      background-color: #3b82f6;
+      background-color: #0c9409;
       color: white;
       border: none;
       padding: 15px 25px;
@@ -213,6 +214,7 @@ body {
   
   .reject-button:hover {
       animation: moveButton 0.5s ease-in-out infinite;
+      background-color: #042b07;
   }
   
   @keyframes moveButton {
