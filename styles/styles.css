@@ -76,8 +76,14 @@ body {
   footer {
     text-align: center;
     padding: 10px;
+    position: fixed;
+    bottom: 0%;
+    width: 100vw;
     background: #004d40;
     color: white;
+
+
+
   }
   .cookie-banner {
     position: fixed;
