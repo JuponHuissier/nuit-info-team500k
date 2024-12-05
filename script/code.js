@@ -43,7 +43,6 @@ const correspondances = {
 document.getElementById('accept-cookies').addEventListener('click', function () {
   const cookieBanner = document.getElementById('cookie-banner');
   cookieBanner.style.display = 'none';
-  alert('Merci d’avoir accepté les cookies ! 🍪');
 });
 
 // Empêcher le clic sur "Rejeter"
