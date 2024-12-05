@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles/clickerstyle.css">
+  <link rel="stylesheet" href="styles/cookieclickerstyle.css">
+</head>
+<body>
+  <div class="game-container">
+    <h1>Cookie Clicker</h1>
+    <div id="score-board">Cookies: <span id="score">0</span></div>
+    <button id="cookie-button">
+      <img src="cookie.png" alt="Cookie" class="cookie-img">
+    </button>
+    <div class="upgrades">
+      <h2>Upgrades</h2>
+      <div class="upgrade" data-cost="10">
+        <span>Grandma</span>
+        <button class="buy-button">Buy (10 cookies)</button>
+      </div>
+      <div class="upgrade" data-cost="50">
+        <span>Factory</span>
+        <button class="buy-button">Buy (50 cookies)</button>
+      </div>
+    </div>
+  </div>
+  <script src="script/clickerscript.js"></script>
+</body>
+</html>
