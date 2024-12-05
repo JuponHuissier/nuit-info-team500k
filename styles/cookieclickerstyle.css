@@ -1,0 +1,61 @@
+.game-container {
+    margin-top: 50px;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    color: #d2691e;
+  }
+  
+  #score-board {
+    font-size: 1.5rem;
+    margin: 20px 0;
+  }
+  
+  #cookie-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 20px;
+  }
+  
+  .cookie-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    transition: transform 0.1s;
+  }
+  
+  .cookie-img:active {
+    transform: scale(0.9);
+  }
+  
+  .upgrades {
+    margin-top: 30px;
+  }
+  
+  .upgrade {
+    margin: 10px auto;
+    padding: 10px;
+    border: 2px solid #d2691e;
+    border-radius: 8px;
+    background-color: #fff8dc;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .buy-button {
+    background-color: #d2691e;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .buy-button:hover {
+    background-color: #a0522d;
+  }

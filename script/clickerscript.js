@@ -3,7 +3,8 @@ let spinning = false
 
 document.addEventListener("click", (event) => {
     console.log("CLICK")
-    if (Math.random() < 2 && !spinning) {
+    const slotMachinePopupChance = 0
+    if (Math.random() < slotMachinePopupChance && !spinning) {
         spinning = true
         console.log("GAMBLECORE")
         // Create a new div element
@@ -45,17 +46,17 @@ document.addEventListener("click", (event) => {
         setTimeout(() => {
             square.remove();
             spinning = false;
-        }, 10000);
+        }, 7500);
         spin();
         spin();
     }
 });
 
 const slotSymbols = [
-    ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'],
-    ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'],
-    ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
-  ];
+    ['😀', '😁', '😂', '😃', '😄', '😅', '😆', '😇', '😈', '😉', '😊', '🍪'],
+      ['🍎', '🍏', '🍐', '🍊', '🍋', '🍌', '🍉', '🍇', '🍓', '🍈', '🍒', '🍪'],
+      ['⭐️', '🌟', '✨', '💫', '⚡️', '☄️', '🌠', '🌌', '🌙', '🌕', '🌖', '🍪']
+    ];
 
   function createSymbolElement(symbol) {
     const div = document.createElement('div');
