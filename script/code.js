@@ -37,4 +37,11 @@ const correspondances = {
     const detailsSection = document.getElementById('details');
     detailsSection.classList.add('hidden');
   }
-  
+  // script.js
+
+// Cacher le bandeau de cookies une fois accepté
+document.getElementById('accept-cookies').addEventListener('click', function () {
+  const cookieBanner = document.getElementById('cookie-banner');
+  cookieBanner.style.display = 'none';
+  alert('Merci d’avoir accepté les cookies ! 🍪');
+});
