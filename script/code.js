@@ -45,3 +45,12 @@ document.getElementById('accept-cookies').addEventListener('click', function () 
   cookieBanner.style.display = 'none';
   alert('Merci d’avoir accepté les cookies ! 🍪');
 });
+
+// Empêcher le clic sur "Rejeter"
+const rejectButton = document.getElementById('reject-cookies');
+
+rejectButton.addEventListener('mouseover', function () {
+  const randomX = Math.random() * 200 - 100; // Position aléatoire en X
+  const randomY = Math.random() * 200 - 100; // Position aléatoire en Y
+  rejectButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+});
