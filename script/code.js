@@ -50,7 +50,7 @@ document.getElementById('accept-cookies').addEventListener('click', function () 
 const rejectButton = document.getElementById('reject-cookies');
 
 rejectButton.addEventListener('mouseover', function () {
-  const randomX = Math.random() * 200 - 100; // Position aléatoire en X
-  const randomY = Math.random() * 200 - 100; // Position aléatoire en Y
+  const randomX = Math.random() * 400 - 100; // Position aléatoire en X
+  const randomY = Math.random() * 400 - 100; // Position aléatoire en Y
   rejectButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
 });
