@@ -46,7 +46,7 @@
       max-width: 600px;
       z-index: 10;
       position: relative;
-      background: linear-gradient(135deg, #add8e6, #87cefa, #b0e0e6, #add8e6);
+      background: linear-gradient(135deg, #1062b4, #5391cf, #98bfe7); /* Dégradé plus foncé */
       background-size: 300% 300%;
       animation: gradient-bg 5s infinite;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -56,6 +56,64 @@
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+
+    /* Styles pour le compteur */
+    #score-board {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 20px 0;
+      color: #fff;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    /* Bouton cookie */
+    #cookie-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin: 20px;
+    }
+
+    #cookie-button h1 {
+      font-size: 10rem;
+      margin: 0;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    #cookie-button h1:active {
+      transform: scale(0.9);
+    }
+
+    .upgrades {
+      margin-top: 30px;
+    }
+
+    .upgrade {
+      margin: 10px auto;
+      padding: 10px;
+      border: 2px solid #d2691e;
+      border-radius: 8px;
+      background-color: #fff8dc;
+      width: 300px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .buy-button {
+      background-color: #d2691e;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .buy-button:hover {
+      background-color: #a0522d;
     }
   </style>
 </head>
@@ -83,10 +141,36 @@
   </div>
 
   <script>
-    // Ajout de nombreux emojis aléatoires en arrière-plan
+    // Déclaration des variables
+    let score = 0;
+    const scoreBoard = document.getElementById('score');
+    const cookieButton = document.getElementById('cookie-button');
+    const buyButtons = document.querySelectorAll('.buy-button');
+
+    // Gestion du clic sur le bouton cookie
+    cookieButton.addEventListener('click', () => {
+      score++;
+      scoreBoard.textContent = score; // Mise à jour du score dans l'interface
+    });
+
+    // Gestion des achats d'améliorations
+    buyButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const cost = parseInt(button.parentElement.getAttribute('data-cost'));
+        if (score >= cost) {
+          score -= cost;
+          scoreBoard.textContent = score;
+          alert(`Vous avez acheté une ${button.previousElementSibling.textContent}!`);
+        } else {
+          alert("Vous n'avez pas assez de cookies!");
+        }
+      });
+    });
+
+    // Ajout d'emojis flottants en arrière-plan
     const emojis = ["🍪", "🍫", "🍩", "🍬", "🎂", "🍭", "🧁"];
     const body = document.querySelector("body");
-    const emojiCount = 150; // Augmenter le nombre d'emojis
+    const emojiCount = 150;
 
     for (let i = 0; i < emojiCount; i++) {
       const emojiElement = document.createElement("div");
@@ -94,10 +178,9 @@
       emojiElement.textContent = emojis[Math.floor(Math.random() * emojis.length)];
       emojiElement.style.left = Math.random() * 100 + "vw";
       emojiElement.style.top = Math.random() * 100 + "vh";
-      emojiElement.style.animationDelay = `${Math.random() * 10}s`; // Délai aléatoire pour les animations
+      emojiElement.style.animationDelay = `${Math.random() * 10}s`;
       body.appendChild(emojiElement);
     }
   </script>
-  <script src="script/clickerscript.js"></script>
 </body>
 </html>
