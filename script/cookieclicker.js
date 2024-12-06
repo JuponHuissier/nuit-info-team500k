@@ -31,6 +31,17 @@ cookieButton.addEventListener('click', () => {
   scoreBoard.textContent = score;  // Met à jour l'affichage du score
 });
 
+
+
+const rejectButton = document.getElementById('reject-cookies');
+rejectButton.addEventListener('click', () => {
+  const sound = new Audio('assets/sfx/beep-warning-6387.mp3');
+  sound.play();
+});
+
+
+
+
 // Fonction pour gérer l'achat des upgrades
 buyButtons.forEach(button => {
   button.addEventListener('click', () => {

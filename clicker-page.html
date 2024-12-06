@@ -152,9 +152,9 @@
     const buyButtons = document.querySelectorAll('.buy-button');
 
     // Chargement des effets sonores
-    const clickSound = new Audio('click-sound.mp3'); // Son pour le clic sur le cookie
-    const purchaseSound = new Audio('purchase-success.mp3'); // Son pour l'achat réussi
-    const failureSound = new Audio('purchase-failure.mp3'); // Son pour l'achat échoué
+    const clickSound = new Audio('assets/sfx/plastic-crunch-83779.mp3'); // Son pour le clic sur le cookie
+    const purchaseSound = new Audio('assets/sfx/goodresult-82807.mp3'); // Son pour l'achat réussi
+    const failureSound = new Audio('assets/sfx/beep-warning-6387.mp3'); // Son pour l'achat échoué
 
     // Gestion du clic sur le bouton cookie
     cookieButton.addEventListener('click', () => {
@@ -194,5 +194,6 @@
       body.appendChild(emojiElement);
     }
   </script>
+
 </body>
 </html>
