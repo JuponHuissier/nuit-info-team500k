@@ -68,21 +68,21 @@
     }
 
     /* Bouton cookie */
-    #cookie-button {
+    .biscuit {
       background: none;
       border: none;
       cursor: pointer;
       margin: 2vh;
     }
 
-    #cookie-button h1 {
+    .biscuit h1 {
       font-size: 10vw;
       margin: 0;
       cursor: pointer;
       transition: transform 0.2s ease;
     }
 
-    #cookie-button h1:active {
+    .biscuit h1:active {
       transform: scale(0.9);
     }
 
@@ -119,15 +119,32 @@
       background-color: #a0522d;
     }
 
+    .blinking-div {
+      position: absolute;
+      left: 0;
+  width: 20vw;
+  height: 20vw;
+  object-fit: contain;
+  display: none;
+}
+
+.image-pub {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
   </style>
 </head>
 <body>
+  <div class="blinking-div"><img src="assets/images/manhattan_project_ad.jpg" class = "image-pub"></div>
   <!-- Éléments du jeu dans un cadre -->
   <div class="game-frame">
     <div class="game-container">
       <h1>Cookie Clicker</h1>
       <div id="score-board">Cookies: <span id="score">0</span></div>
-      <button id="cookie-button">
+      <button id="cookie-button" class="biscuit">
         <h1>🍪</h1>
       </button>
       <div class="upgrades">
@@ -153,11 +170,19 @@
     const scoreBoard = document.getElementById('score');
     const cookieButton = document.getElementById('cookie-button');
     const buyButtons = document.querySelectorAll('.buy-button');
-  
+    let age = 0;
+    let cookieObject = document.getElementsByClassName('biscuit')
+    const gameContainer = document.querySelector('.game-container');
+
     // Chargement des effets sonores
     const clickSound = new Audio('assets/sfx/plastic-crunch-83779.mp3'); // Son pour le clic sur le cookie
     const purchaseSound = new Audio('assets/sfx/goodresult-82807.mp3'); // Son pour l'achat réussi
     const failureSound = new Audio('assets/sfx/beep-warning-6387.mp3'); // Son pour l'achat échoué
+    const manScreaming = new Audio('assets/sfx/man-screaming.mp3');
+    const alienScreaming = new Audio('assets/sfx/alien-screaming.mp3')
+    const womanScreaming = new Audio('assets/sfx/woman-screaming.mp3');
+    const bloodSound = new Audio('assets/sfx/blood-sound.mp3');
+
   
     // Fonction pour générer des cookies par seconde
     function generateCookiesPerSecond() {
@@ -166,10 +191,72 @@
     }
   
     // Gestion du clic sur le bouton cookie
+    function bougerCookie() {
+    setTimeout(() => {
+        // Position aléatoire pour le cookie actuel
+        const randomX = Math.random() * 200 - 100; 
+        const randomY = Math.random() * 200 - 100; 
+        cookieButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+        // Dupliquer le cookie
+        const newCookie = document.createElement('button');
+        newCookie.classList.add('biscuit');
+        newCookie.innerHTML = '<h1>🍪</h1>';
+        newCookie.style.position = 'absolute';
+        newCookie.style.top = `${Math.random() * 100}vh`;
+        newCookie.style.left = `${Math.random() * 100}vw`;
+        newCookie.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        newCookie.style.cursor = 'pointer';
+        newCookie.addEventListener('click', () => {
+            score++;
+            age++;
+            if (age > 500) {
+                bloodSound.play();
+                cookieIsRunningAway = true;
+                alert("VOUS AVEZ ASSEZ JOUÉ !");
+            }
+            scoreBoard.textContent = score;
+            clickSound.play();
+        });
+        gameContainer.appendChild(newCookie);
+
+        if (cookieIsRunningAway) {
+            bougerCookie();
+        }
+    }, 100);
+}
+    let cookieIsRunningAway = false
     cookieButton.addEventListener('click', () => {
+      cookieIsRunningAway = false
       score++;
+      age++;
+      if (age > 100){
+          bloodSound.play();
+          cookieIsRunningAway = true
+      }
+      if (cookieIsRunningAway){
+        const randomX = Math.random() * 200 - 100; // Position aléatoire en X
+        const randomY = Math.random() * 200 - 100; // Position aléatoire en Y
+        cookieButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        bougerCookie()
+
+        
+      }
       scoreBoard.textContent = score; // Mise à jour du score dans l'interface
-      clickSound.play(); // Joue le son pour le clic
+      const chanceTime = Math.random();
+      if (chanceTime < 0.94){
+        clickSound.play(); // Joue le son pour le clic
+      }
+      else if (chanceTime < 0.96){
+        manScreaming.play();
+      }
+      else if (chanceTime < 0.98){
+        alienScreaming.play();
+      }
+      else {
+        womanScreaming.play();
+      }
+  
     });
   
     // Fonction pour ajouter des cookies automatiquement en fonction des factories
@@ -214,77 +301,33 @@
   
     // Mise à jour des cookies générés toutes les secondes
     setInterval(generateCookiesPerSecond, 1000);
-  </script><script>
-  // Déclaration des variables
-  let score = 0;
-  let grandmaCount = 0; // Nombre de grand-mères
-  let factoryCount = 0; // Nombre de factories
-  let cookiesPerSecond = 0; // Cookies par seconde
-  const scoreBoard = document.getElementById('score');
-  const cookieButton = document.getElementById('cookie-button');
-  const buyButtons = document.querySelectorAll('.buy-button');
 
-  // Chargement des effets sonores
-  const clickSound = new Audio('assets/sfx/plastic-crunch-83779.mp3'); // Son pour le clic sur le cookie
-  const purchaseSound = new Audio('assets/sfx/goodresult-82807.mp3'); // Son pour l'achat réussi
-  const failureSound = new Audio('assets/sfx/beep-warning-6387.mp3'); // Son pour l'achat échoué
+    // Ajout d'emojis flottants en arrière-plan
+    const emojis = ["🍪", "🍫", "🍩", "🍬", "🎂", "🍭", "🧁"];
+    const body = document.querySelector("body");
+    const emojiCount = 150;
 
-  // Fonction pour générer des cookies par seconde
-  function generateCookiesPerSecond() {
-    score += cookiesPerSecond;
-    scoreBoard.textContent = score; // Mise à jour du score dans l'interface
-  }
+    for (let i = 0; i < emojiCount; i++) {
+      const emojiElement = document.createElement("div");
+      emojiElement.classList.add("emoji");
+      emojiElement.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emojiElement.style.left = Math.random() * 100 + "vw";
+      emojiElement.style.top = Math.random() * 100 + "vh";
+      emojiElement.style.animationDelay = `${Math.random() * 10}s`;
+      body.appendChild(emojiElement);
+    }
 
-  // Gestion du clic sur le bouton cookie
-  cookieButton.addEventListener('click', () => {
-    score++;
-    scoreBoard.textContent = score; // Mise à jour du score dans l'interface
-    clickSound.play(); // Joue le son pour le clic
-  });
+    const blinkingDiv = document.querySelector('.blinking-div');
 
-  // Fonction pour ajouter des cookies automatiquement en fonction des factories
-  function autoGenerateCookies() {
-    score += factoryCount * 3; // Chaque factory génère 3 cookies par seconde
-    scoreBoard.textContent = score; // Mise à jour du score
-  }
-
-  // Mise à jour des cookies chaque seconde (appel de la fonction toutes les 1000 ms)
-  setInterval(autoGenerateCookies, 1000);
-
-  // Gestion des achats d'améliorations
-  buyButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const cost = parseInt(button.parentElement.getAttribute('data-cost')); // Récupère le prix de l'upgrade
-      if (score >= cost) {  // Si le score est suffisant pour acheter
-        score -= cost;  // Déduit le coût de l'upgrade du score
-        scoreBoard.textContent = score;  // Met à jour l'affichage du score
-        
-        // Si l'achat est pour une grand-mère, met à jour les cookies par seconde
-        if (button.previousElementSibling.textContent === "Grandma") {
-          grandmaCount++;
-          cookiesPerSecond = grandmaCount; // 1 cookie par seconde par grand-mère
-        }
-
-        // Si l'achat est pour une factory, met à jour le compteur de factories
-        if (button.previousElementSibling.textContent === "Factory") {
-          factoryCount++;
-        }
-
-        // Augmenter le prix de l'upgrade
-        button.parentElement.setAttribute('data-cost', cost * 4);
-        button.innerHTML = `Buy (${button.parentElement.getAttribute('data-cost')} cookies)`;
-        purchaseSound.play(); // Joue le son d'achat
-        alert(`Vous avez acheté une ${button.previousElementSibling.textContent}!`);
-      } else {
-        failureSound.play(); // Joue le son d'échec
-        alert("Vous n'avez pas assez de cookies!");
+    setInterval(()=> {
+      if (blinkingDiv.style.display === 'none') {
+        blinkingDiv.style.display = "block";
       }
-    });
-  });
-
-  // Mise à jour des cookies générés toutes les secondes
-  setInterval(generateCookiesPerSecond, 1000);
-</script>
-
+      else {
+        blinkingDiv.style.display = 'none';
+      }
+    }, 10000)
+  </script>
+<script src="script/clickerscript.js"></script>
 </body>
 </html>
