@@ -1,16 +1,92 @@
+/* Style de la zone de jeu */
 .game-container {
-    margin-top: 50px;
-    text-align: center;
+  margin-top: 50px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #d2691e;
+}
+
+/* Style du tableau de score */
+#score-board {
+  font-size: 1.5rem;
+  margin: 20px 0;
+}
+
+/* Style du bouton cookie */
+#cookie-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 20px;
+}
+
+#cookie-button h1 {
+  font-size: 10rem;
+  margin: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#cookie-button h1:active {
+  transform: scale(0.9);
+}
+
+/* Style des améliorations */
+.upgrades {
+  margin-top: 30px;
+}
+
+.upgrade {
+  margin: 10px auto;
+  padding: 10px;
+  border: 2px solid #d2691e;
+  border-radius: 8px;
+  background-color: #fff8dc;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Style du bouton d'achat */
+.buy-button {
+  background-color: #d2691e;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Transition pour la couleur et la taille */
+}
+
+.buy-button:hover {
+  background-color: #a0522d; /* Couleur de fond au survol */
+  transform: scale(1.1); /* Légère agrandissement */
+}
+
+/* Effet de clic sur le bouton */
+@keyframes button-click-effect {
+  0% {
+    transform: scale(1);
   }
-  h1 {
-    font-size: 3rem;
-    color: #d2691e;
+  50% {
+    transform: scale(0.9); /* Réduit légèrement la taille */
+    box-shadow: 0 0 10px #d2691e; /* Lueur autour du bouton */
   }
-  
-  #score-board {
-    font-size: 1.5rem;
-    margin: 20px 0;
+  100% {
+    transform: scale(1);
   }
+
+}
+
+.buy-button:active {
+  animation: button-click-effect 0.2s ease-out; /* Animation lors du clic */
+  transform: scale(0.95); /* Petite réduction lors du clic */
+}
+
   
   #cookie-button {
     background: none;
@@ -122,3 +198,4 @@
     padding-top: 25px;
 }
  
+

@@ -164,11 +164,14 @@
   <script>
     // Déclaration des variables
     let score = 0;
-    let age = 0;
-    let cookieObject = document.getElementsByClassName('biscuit')
+    let grandmaCount = 0; // Nombre de grand-mères
+    let factoryCount = 0; // Nombre de factories
+    let cookiesPerSecond = 0; // Cookies par seconde
     const scoreBoard = document.getElementById('score');
     const cookieButton = document.getElementById('cookie-button');
     const buyButtons = document.querySelectorAll('.buy-button');
+    let age = 0;
+    let cookieObject = document.getElementsByClassName('biscuit')
     const gameContainer = document.querySelector('.game-container');
 
     // Chargement des effets sonores
@@ -180,6 +183,13 @@
     const womanScreaming = new Audio('assets/sfx/woman-screaming.mp3');
     const bloodSound = new Audio('assets/sfx/blood-sound.mp3');
 
+  
+    // Fonction pour générer des cookies par seconde
+    function generateCookiesPerSecond() {
+      score += cookiesPerSecond;
+      scoreBoard.textContent = score; // Mise à jour du score dans l'interface
+    }
+  
     // Gestion du clic sur le bouton cookie
     function bougerCookie() {
     setTimeout(() => {
@@ -248,22 +258,49 @@
       }
   
     });
-
+  
+    // Fonction pour ajouter des cookies automatiquement en fonction des factories
+    function autoGenerateCookies() {
+      score += factoryCount * 3; // Chaque factory génère 3 cookies par seconde
+      scoreBoard.textContent = score; // Mise à jour du score
+    }
+  
+    // Mise à jour des cookies chaque seconde (appel de la fonction toutes les 1000 ms)
+    setInterval(autoGenerateCookies, 1000);
+  
     // Gestion des achats d'améliorations
     buyButtons.forEach(button => {
       button.addEventListener('click', () => {
-        const cost = parseInt(button.parentElement.getAttribute('data-cost'));
-        if (score >= cost) {
-          score -= cost;
-          scoreBoard.textContent = score;
-          purchaseSound.play(); // Joue le son pour un achat réussi
+        const cost = parseInt(button.parentElement.getAttribute('data-cost')); // Récupère le prix de l'upgrade
+        if (score >= cost) {  // Si le score est suffisant pour acheter
+          score -= cost;  // Déduit le coût de l'upgrade du score
+          scoreBoard.textContent = score;  // Met à jour l'affichage du score
+          
+          // Si l'achat est pour une grand-mère, met à jour les cookies par seconde
+          if (button.previousElementSibling.textContent === "Grandma") {
+            grandmaCount++;
+            cookiesPerSecond = grandmaCount; // 1 cookie par seconde par grand-mère
+          }
+  
+          // Si l'achat est pour une factory, met à jour le compteur de factories
+          if (button.previousElementSibling.textContent === "Factory") {
+            factoryCount++;
+          }
+  
+          // Augmenter le prix de l'upgrade
+          button.parentElement.setAttribute('data-cost', cost * 4);
+          button.innerHTML = `Buy (${button.parentElement.getAttribute('data-cost')} cookies)`;
+          purchaseSound.play(); // Joue le son d'achat
           alert(`Vous avez acheté une ${button.previousElementSibling.textContent}!`);
         } else {
-          failureSound.play(); // Joue le son pour un achat échoué
+          failureSound.play(); // Joue le son d'échec
           alert("Vous n'avez pas assez de cookies!");
         }
       });
     });
+  
+    // Mise à jour des cookies générés toutes les secondes
+    setInterval(generateCookiesPerSecond, 1000);
 
     // Ajout d'emojis flottants en arrière-plan
     const emojis = ["🍪", "🍫", "🍩", "🍬", "🎂", "🍭", "🧁"];
