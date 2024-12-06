@@ -3,7 +3,7 @@ let spinning = false
 
 document.addEventListener("click", (event) => {
     console.log("CLICK")
-    const slotMachinePopupChance = 0
+    const slotMachinePopupChance = 1
     if (Math.random() < slotMachinePopupChance && !spinning) {
         spinning = true
         console.log("GAMBLECORE")
