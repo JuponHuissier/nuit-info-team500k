@@ -3,29 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Cookie Clicker</title>
   <link rel="stylesheet" href="styles/clickerstyle.css">
-  <link rel="stylesheet" href="styles/cookieclickerstyle.css">
+  <style>
+    /* Style global pour la page */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+      background-size: 400% 400%;
+      animation: rainbow-bg 10s infinite;
+    }
+
+    @keyframes rainbow-bg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Emojis flottants */
+    .emoji {
+      position: absolute;
+      font-size: 3rem;
+      animation: float 15s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-30px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Conteneur principal */
+    .game-frame {
+      border: 5px solid black; /* Bordures noires épaisses */
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 600px;
+      z-index: 10;
+      position: relative;
+      background: linear-gradient(135deg, #add8e6, #87cefa, #b0e0e6, #add8e6);
+      background-size: 300% 300%;
+      animation: gradient-bg 5s infinite;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes gradient-bg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
 </head>
 <body>
-  <div class="game-container">
-    <h1>Cookie Clicker</h1>
-    <div id="score-board">Cookies: <span id="score">0</span></div>
-    <button id="cookie-button">
-      <img src="cookie.png" alt="Cookie" class="cookie-img">
-    </button>
-    <div class="upgrades">
-      <h2>Upgrades</h2>
-      <div class="upgrade" data-cost="10">
-        <span>Grandma</span>
-        <button class="buy-button">Buy (10 cookies)</button>
-      </div>
-      <div class="upgrade" data-cost="50">
-        <span>Factory</span>
-        <button class="buy-button">Buy (50 cookies)</button>
+  <!-- Éléments du jeu dans un cadre -->
+  <div class="game-frame">
+    <div class="game-container">
+      <h1>Cookie Clicker</h1>
+      <div id="score-board">Cookies: <span id="score">0</span></div>
+      <button id="cookie-button">
+        <h1>🍪</h1>
+      </button>
+      <div class="upgrades">
+        <h2>Upgrades</h2>
+        <div class="upgrade" data-cost="10">
+          <span>Grandma</span>
+          <button class="buy-button">Buy (10 cookies)</button>
+        </div>
+        <div class="upgrade" data-cost="50">
+          <span>Factory</span>
+          <button class="buy-button">Buy (50 cookies)</button>
+        </div>
       </div>
     </div>
   </div>
+
+  <script>
+    // Ajout de nombreux emojis aléatoires en arrière-plan
+    const emojis = ["🍪", "🍫", "🍩", "🍬", "🎂", "🍭", "🧁"];
+    const body = document.querySelector("body");
+    const emojiCount = 150; // Augmenter le nombre d'emojis
+
+    for (let i = 0; i < emojiCount; i++) {
+      const emojiElement = document.createElement("div");
+      emojiElement.classList.add("emoji");
+      emojiElement.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emojiElement.style.left = Math.random() * 100 + "vw";
+      emojiElement.style.top = Math.random() * 100 + "vh";
+      emojiElement.style.animationDelay = `${Math.random() * 10}s`; // Délai aléatoire pour les animations
+      body.appendChild(emojiElement);
+    }
+  </script>
   <script src="script/clickerscript.js"></script>
 </body>
 </html>
