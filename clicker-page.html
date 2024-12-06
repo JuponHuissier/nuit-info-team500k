@@ -86,6 +86,7 @@
       transform: scale(0.9);
     }
 
+    /* Section des upgrades */
     .upgrades {
       margin-top: 3vh;
     }
@@ -102,6 +103,7 @@
       align-items: center;
     }
 
+    /* Augmentation de la taille des boutons */
     .buy-button {
       background-color: #d2691e;
       color: white;
@@ -110,6 +112,7 @@
       border-radius: 0.5vh;
       cursor: pointer;
       transition: background-color 0.3s;
+      font-size: 1.1rem; /* Augmenter la taille du texte */
     }
 
     .buy-button:hover {
@@ -148,10 +151,16 @@
     const cookieButton = document.getElementById('cookie-button');
     const buyButtons = document.querySelectorAll('.buy-button');
 
+    // Chargement des effets sonores
+    const clickSound = new Audio('click-sound.mp3'); // Son pour le clic sur le cookie
+    const purchaseSound = new Audio('purchase-success.mp3'); // Son pour l'achat réussi
+    const failureSound = new Audio('purchase-failure.mp3'); // Son pour l'achat échoué
+
     // Gestion du clic sur le bouton cookie
     cookieButton.addEventListener('click', () => {
       score++;
       scoreBoard.textContent = score; // Mise à jour du score dans l'interface
+      clickSound.play(); // Joue le son pour le clic
     });
 
     // Gestion des achats d'améliorations
@@ -161,8 +170,10 @@
         if (score >= cost) {
           score -= cost;
           scoreBoard.textContent = score;
+          purchaseSound.play(); // Joue le son pour un achat réussi
           alert(`Vous avez acheté une ${button.previousElementSibling.textContent}!`);
         } else {
+          failureSound.play(); // Joue le son pour un achat échoué
           alert("Vous n'avez pas assez de cookies!");
         }
       });
