@@ -28,8 +28,6 @@
       font-size: 3rem;
       animation: float 15s infinite ease-in-out;
       pointer-events: none;
-      color: white;
-      -webkit-text-stroke: 1px black; /* Contour fin des emojis */
     }
 
     @keyframes float {
@@ -40,12 +38,12 @@
 
     /* Conteneur principal */
     .game-frame {
-      border: 5px solid black; /* Bordures noires épaisses */
-      margin: 50px auto;
+      border: 6px solid black; /* Bordures fines */
+      margin: 35px auto;
       padding: 20px;
-      border-radius: 15px;
+      border-radius: 30px;
       width: 80%;
-      max-width: 600px;
+      max-width: 550px; /* Réduction de la largeur du cadre */
       z-index: 10;
       position: relative;
       background: linear-gradient(135deg, #1062b4, #5391cf, #98bfe7); /* Dégradé plus foncé */
@@ -82,22 +80,21 @@
       margin: 0;
       cursor: pointer;
       transition: transform 0.2s ease;
-      color: white;
-      -webkit-text-stroke: 1px black; /* Contour fin autour du texte du bouton */
     }
 
     #cookie-button h1:active {
       transform: scale(0.9);
     }
 
+    /* Section des upgrades */
     .upgrades {
       margin-top: 30px;
     }
 
     .upgrade {
       margin: 10px auto;
-      padding: 10px;
-      border: 2px solid #d2691e;
+      padding: 15px; /* Augmenter l'espace intérieur */
+      border: 2px solid #d2691e; /* Contour fin */
       border-radius: 8px;
       background-color: #fff8dc;
       width: 300px;
@@ -106,14 +103,16 @@
       align-items: center;
     }
 
+    /* Augmentation de la taille des boutons */
     .buy-button {
       background-color: #d2691e;
       color: white;
       border: none;
-      padding: 5px 10px;
+      padding: 10px 20px; /* Augmenter la taille des boutons */
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s;
+      font-size: 1.1rem; /* Augmenter la taille du texte */
     }
 
     .buy-button:hover {
@@ -151,10 +150,16 @@
     const cookieButton = document.getElementById('cookie-button');
     const buyButtons = document.querySelectorAll('.buy-button');
 
+    // Chargement des effets sonores
+    const clickSound = new Audio('click-sound.mp3'); // Son pour le clic sur le cookie
+    const purchaseSound = new Audio('purchase-success.mp3'); // Son pour l'achat réussi
+    const failureSound = new Audio('purchase-failure.mp3'); // Son pour l'achat échoué
+
     // Gestion du clic sur le bouton cookie
     cookieButton.addEventListener('click', () => {
       score++;
       scoreBoard.textContent = score; // Mise à jour du score dans l'interface
+      clickSound.play(); // Joue le son pour le clic
     });
 
     // Gestion des achats d'améliorations
@@ -164,8 +169,10 @@
         if (score >= cost) {
           score -= cost;
           scoreBoard.textContent = score;
+          purchaseSound.play(); // Joue le son pour un achat réussi
           alert(`Vous avez acheté une ${button.previousElementSibling.textContent}!`);
         } else {
+          failureSound.play(); // Joue le son pour un achat échoué
           alert("Vous n'avez pas assez de cookies!");
         }
       });
