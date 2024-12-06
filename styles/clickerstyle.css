@@ -85,3 +85,114 @@ h1 {
   animation: button-click-effect 0.2s ease-out; /* Animation lors du clic */
   transform: scale(0.95); /* Petite réduction lors du clic */
 }
+  
+  #cookie-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 20px;
+  }
+  
+  #cookie-button h1 {
+    font-size: 10rem;
+    margin: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  #cookie-button h1:active {
+    transform: scale(0.9);
+  }
+  
+  .upgrades {
+    margin-top: 30px;
+  }
+  
+  .upgrade {
+    margin: 10px auto;
+    padding: 10px;
+    border: 2px solid #d2691e;
+    border-radius: 8px;
+    background-color: #fff8dc;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .buy-button {
+    background-color: #d2691e;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .buy-button:hover {
+    background-color: #a0522d;
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.square {
+    width: 30vw;
+    height: 20vh;
+    background: none;
+    position: absolute;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.slotcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.slot {
+    width: 33%;
+    height: 30vh;
+    border: 1px solid black;
+    border-radius: 7.5px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    background: #fafafa;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.4) inset;
+}
+
+.slot .symbols {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: top 5s;
+}
+
+.slot .symbol {
+    width: 100%;
+    height: 100%;
+    font-size: 6em;
+    line-height: 125%;
+    display: block;
+    text-align: center;
+    padding-top: 25px;
+}
+ 
