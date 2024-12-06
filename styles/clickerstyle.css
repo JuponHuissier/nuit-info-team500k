@@ -59,4 +59,66 @@
   .buy-button:hover {
     background-color: #a0522d;
   }
-  
+
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.square {
+    width: 30vw;
+    height: 20vh;
+    background: none;
+    position: absolute;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.slotcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.slot {
+    width: 33%;
+    height: 30vh;
+    border: 1px solid black;
+    border-radius: 7.5px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    background: #fafafa;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.4) inset;
+}
+
+.slot .symbols {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: top 5s;
+}
+
+.slot .symbol {
+    width: 100%;
+    height: 100%;
+    font-size: 6em;
+    line-height: 125%;
+    display: block;
+    text-align: center;
+    padding-top: 25px;
+}
+ 

@@ -3,7 +3,7 @@ let spinning = false
 
 document.addEventListener("click", (event) => {
     console.log("CLICK")
-    const slotMachinePopupChance = 1
+    const slotMachinePopupChance = 0.05
     if (Math.random() < slotMachinePopupChance && !spinning) {
         spinning = true
         console.log("GAMBLECORE")
@@ -14,7 +14,7 @@ document.addEventListener("click", (event) => {
         square.classList.add("square");
 
         // Position the square at the click location
-        square.style.left = `${100 * event.clientX/screen.width - 15}vw`;
+        square.style.left = `${100 * event.clientX/screen.width - 30}vw`;
         square.style.top = `${100 * event.clientY/screen.height - 40}vh`;
         console.log(event.clientX/screen.width)
 
@@ -38,7 +38,7 @@ document.addEventListener("click", (event) => {
                             </div>`
 
         // Append the square to the body
-        document.body.appendChild(square);
+        gameContainer.appendChild(square);
 
         const letsGoGambling = new Audio('./assets/sfx/Lets-go-gambling.mp3');
         letsGoGambling.play();
@@ -51,6 +51,7 @@ document.addEventListener("click", (event) => {
         spin();
     }
 });
+
 
 const slotSymbols = [
     ['😀', '😁', '😂', '😃', '😄', '😅', '😆', '😇', '😈', '😉', '😊', '🍪'],
