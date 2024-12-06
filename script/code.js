@@ -40,7 +40,7 @@ const correspondances = {
     `,
   };
   
-  // Afficher les détails
+
   function showDetail(section) {
     const detailsSection = document.getElementById('details');
     const detailsContent = document.getElementById('details-content');
@@ -48,21 +48,38 @@ const correspondances = {
     detailsSection.classList.remove('hidden');
   }
   
-  // Cacher les détails
+ 
   function hideDetail() {
     const detailsSection = document.getElementById('details');
     detailsSection.classList.add('hidden');
   }
-  // script.js
+  
 
-// Cacher le bandeau de cookies une fois accepté
 document.getElementById('accept-cookies').addEventListener('click', function () {
   const cookieBanner = document.getElementById('cookie-banner');
   cookieBanner.style.display = 'none';
 });
 
-// Empêcher le clic sur "Rejeter"
+// partie audio bouton rejeter 
+
 const rejectButton = document.getElementById('reject-cookies');
+rejectButton.addEventListener('click', () => {
+  const sound = new Audio('assets/sfx/beep-warning-6387.mp3');
+  sound.play();
+});
+
+// fin partie audio bouton 
+
+// debut partie audio bouton accepter (inutile)
+
+const acceptButton = document.getElementById('accept-cookies');
+acceptButton.addEventListener('click', () => {
+  const sound2 = new Audio('assets/sfx/goodresult-82807.mp3');
+  sound2.play();
+});
+
+
+// fin partie audio bouton accepter
 
 rejectButton.addEventListener('mouseover', function () {
   const randomX = Math.random() * 200 - 100; // Position aléatoire en X
