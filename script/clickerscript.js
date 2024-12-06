@@ -3,7 +3,7 @@ let spinning = false
 
 document.addEventListener("click", (event) => {
     console.log("CLICK")
-    const slotMachinePopupChance = 1
+    const slotMachinePopupChance = 0.05
     if (Math.random() < slotMachinePopupChance && !spinning) {
         spinning = true
         console.log("GAMBLECORE")
@@ -14,7 +14,7 @@ document.addEventListener("click", (event) => {
         square.classList.add("square");
 
         // Position the square at the click location
-        square.style.left = `${100 * event.clientX/screen.width - 15}vw`;
+        square.style.left = `${100 * event.clientX/screen.width - 30}vw`;
         square.style.top = `${100 * event.clientY/screen.height - 40}vh`;
         console.log(event.clientX/screen.width)
 
@@ -38,7 +38,7 @@ document.addEventListener("click", (event) => {
                             </div>`
 
         // Append the square to the body
-        document.body.appendChild(square);
+        gameContainer.appendChild(square);
 
         const letsGoGambling = new Audio('./assets/sfx/Lets-go-gambling.mp3');
         letsGoGambling.play();
@@ -51,10 +51,6 @@ document.addEventListener("click", (event) => {
         spin();
     }
 });
-let score = 0;
-const scoreBoard = document.getElementById('score');
-const cookieButton = document.getElementById('cookie-button');
-const buyButtons = document.querySelectorAll('.buy-button');
 const baseTitle = "Cookie Clicker";
 
 // Fonction pour générer une version "désordonnée" du titre
@@ -85,16 +81,6 @@ cookieButton.addEventListener('click', () => {
 });
 
 
-
-const rejectButton = document.getElementById('reject-cookies');
-rejectButton.addEventListener('click', () => {
-  const sound = new Audio('assets/sfx/beep-warning-6387.mp3');
-  sound.play();
-});
-
-
-
-
 // Fonction pour gérer l'achat des upgrades
 buyButtons.forEach(button => {
   button.addEventListener('click', () => {
@@ -113,6 +99,7 @@ buyButtons.forEach(button => {
     }
   });
 });
+
 
 const slotSymbols = [
     ['😀', '😁', '😂', '😃', '😄', '😅', '😆', '😇', '😈', '😉', '😊', '🍪'],
@@ -177,6 +164,10 @@ const slotSymbols = [
     });
   }
   let jackpockVerify = false
+
+  const ohDangIt = new Audio('./assets/sfx/oh-dang-it.mp3');
+  const goodResultSFX = new Audio('./assets/sfx/goodresult-82807.mp3');
+
   function logDisplayedSymbols() {
     const slots = document.querySelectorAll('.slot');
     const displayedSymbols = [];
@@ -187,13 +178,15 @@ const slotSymbols = [
       console.log(displayedSymbols);
 
       // Check if all displayed symbols are the same
-      const allSame = displayedSymbols.every(symbol => symbol === displayedSymbols[0]);
+      const allSame = (displayedSymbols[0] == '🍪' && displayedSymbols[1] == '🍪' && displayedSymbols[2]== '🍪');
       if (allSame && !jackpockVerify) {
         console.log("Jackpot! All symbols are the same:", displayedSymbols[0]);
         jackpockVerify = true
+        goodResultSFX.play()
       } else if (!jackpockVerify){
         console.log("No match, try again.");
         jackpockVerify = true
+        ohDangIt.play()
       }
     });
   }
